@@ -11,6 +11,7 @@ export default function Index() {
       }}
     >
       <Text className="font-bold  my-10 font-rubik text-3xl">Welcome To The Realtor's Nest</Text>
+      <Link href="/sign-in">Sign In</Link>
     </View>
   );
 }
