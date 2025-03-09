@@ -22,7 +22,7 @@ const GlobalContext = createContext<GlobalContextType | undefined>(
 
 export const GlobalProvider = ({ children } : { children: ReactNode }) => {
     const {
-        data: user,
+        data: user = null,
         loading, 
         refetch,
     } = useAppwrite({
@@ -30,6 +30,7 @@ export const GlobalProvider = ({ children } : { children: ReactNode }) => {
     });
 
     const isLogged = !!user;
+
 
     return (
         <GlobalContext.Provider value={{
