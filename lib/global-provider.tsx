@@ -22,7 +22,9 @@ const GlobalContext = createContext<GlobalContextType | undefined>(
 
 export const GlobalProvider = ({ children } : { children: ReactNode }) => {
     const {
-        data: user = null, loading, refetch,
+        data: user,
+        loading, 
+        refetch,
     } = useAppwrite({
         fn: getCurrentUser, 
     });
