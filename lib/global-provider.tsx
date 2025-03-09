@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, ReactNode, useContext } from "react";
 import { useAppwrite } from "./useAppwrite";
 import { getCurrentUser } from './appwrite'
 
@@ -20,7 +20,7 @@ const GlobalContext = createContext<GlobalContextType | undefined>(
     undefined
 );
 
-export const GlobalProvider = ({ children } : { children: React.ReactNode }) => {
+export const GlobalProvider = ({ children } : { children: ReactNode }) => {
     const {
         data: user = null, loading, refetch,
     } = useAppwrite({
