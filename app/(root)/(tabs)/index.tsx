@@ -23,7 +23,7 @@ export default function Index() {
 								Hi There,
 							</Text>
 							<Text className="text-base font-rubik-medium text-black-300">
-								Hollali
+								Hollali Kelvin
 							</Text>
 						</View>
 					</View>
