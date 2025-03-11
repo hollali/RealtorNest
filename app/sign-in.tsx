@@ -26,7 +26,7 @@ const SignIn = () => {
 					className="w-full h-4/6"
 					resizeMode="contain"
 				/>
-				<View className="px10">
+				<View className="px-10">
 					<Text className="text-base text-center uppercase font-rubik text-black-200">
 						Welcome to the Realtor's Nest
 					</Text>
