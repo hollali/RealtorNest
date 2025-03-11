@@ -3,6 +3,15 @@ import images from "@/constants/images";
 import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
+const SettingsItem = ({icon, title, onPress, textStyle, showArrow= true}) => {
+  <TouchableOpacity>
+    <View>
+      <Image source={icon}/>
+      <Text>{title}</Text>
+    </View>
+  </TouchableOpacity>
+}
+
 const Profile = () => {
 	const handleLogout = () => {};
 	return (
@@ -23,6 +32,9 @@ const Profile = () => {
             </TouchableOpacity>
             <Text className="text-2xl font-rubik-bold mt-2">Hollali</Text>
           </View>
+        </View>
+        <View className="flex flex-col mt-10">
+
         </View>
       </ScrollView>
 		</SafeAreaView>
