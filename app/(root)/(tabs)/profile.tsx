@@ -1,19 +1,43 @@
+import { settings } from "@/constants/data";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import { logout } from "@/lib/appwrite";
+import { useGlobalContext } from "@/lib/global-provider";
+import { View, Text, ScrollView, Image, TouchableOpacity, ImageSourcePropType, Alert } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const SettingsItem = ({icon, title, onPress, textStyle, showArrow= true}) => {
-  <TouchableOpacity>
-    <View>
-      <Image source={icon}/>
-      <Text>{title}</Text>
-    </View>
-  </TouchableOpacity>
+interface SettingsItemProps {
+  icon: ImageSourcePropType;
+  title: string;
+  onPress?: () => void;
+  textStyle?: string;
+  showArrow?: boolean;
+}
+
+const SettingsItem = ({icon, title, onPress, textStyle, showArrow= true} : SettingsItemProps) => {
+  return (
+    <TouchableOpacity onPress={onPress} className="flex flex-row items-center justify-between py-3">
+      <View className="flex flex-row items-center gap-3">
+        <Image source={icon} className="size-6"/>
+        <Text className={`text-lg font-rubik-medium text-black-300${textStyle}`}>{title}</Text>
+      </View>
+      {showArrow && <Image source={icons.rightArrow} className="size-5" />}
+    </TouchableOpacity>
+  );
 }
 
 const Profile = () => {
-	const handleLogout = () => {};
+  const {user ,refetch} = useGlobalContext();
+  const handleLogout = async () => {
+    //* implement logout logic here
+    const result = await logout();
+    if(result){
+      Alert.alert("You have been logged out");
+      refetch();
+    } else {
+      Alert.alert("An error occurred while logging out");
+    }
+  };
 	return (
 		<SafeAreaView className="h-full bg-white">
 			<ScrollView
@@ -26,15 +50,24 @@ const Profile = () => {
         </View>
         <View className="flex flex-row justify-center mt-5">
           <View className="flex flex-col items-center relative mt-5">
-            <Image source={images.avatar} className="size-44 relative rounded-full"/>
+            <Image source={{ uri: user?.avatar}} className="size-44 relative rounded-full"/>
             <TouchableOpacity className="absolute bottom-11 right-2">
               <Image source={icons.edit} className="size-9"/>
             </TouchableOpacity>
-            <Text className="text-2xl font-rubik-bold mt-2">Hollali</Text>
+            <Text className="text-2xl font-rubik-bold mt-2">{user?.name}</Text>
           </View>
         </View>
         <View className="flex flex-col mt-10">
-
+          <SettingsItem icon={icons.calendar} title="My Bookings"/>
+          <SettingsItem icon={icons.wallet} title="Payments"/>
+        </View>
+        <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
+          {settings.slice(2).map((item, index) => (
+            <SettingsItem key={index} {...item}/>
+          ))}
+        </View>
+        <View className="flex flex-col mt-5 border-t pt-5 border-primary-200">
+          <SettingsItem icon={icons.logout} title="Logout" textStyle="text-danger" showArrow={false} onPress={handleLogout}/>
         </View>
       </ScrollView>
 		</SafeAreaView>
