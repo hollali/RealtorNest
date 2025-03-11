@@ -36,7 +36,6 @@ export const FeaturedCard = ({ item, onPress }: Props) => {
                     Airport Residential
 					{item.address}
 				</Text>
-
 				<View className="flex flex-row items-center justify-between w-full">
 					<Text className="text-base font-rubik-bold text-white">
                         120,000
