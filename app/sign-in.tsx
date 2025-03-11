@@ -8,8 +8,8 @@ import { useGlobalContext } from "@/lib/global-provider";
 import { Redirect } from "expo-router";
 
 const SignIn = () => {
-	const { refetch, loading, isLogged} =useGlobalContext();
-	if (!loading && !isLogged) return <Redirect href="/"/>;
+	const { refetch, loading, isLogged} = useGlobalContext();
+	if (!loading && isLogged) return <Redirect href="/"/>;
 	const handleLogin = async () => {
 		const result = await login();
 		if (result) {
