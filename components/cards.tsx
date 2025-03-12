@@ -59,17 +59,20 @@ export const Card = ({ item, onPress }: Props) => {
 					{item.rating}
 				</Text>
 			</View>
-			<Image source={{ uri: item.image }} className="w-full h-40 rounded-lg" />
+			<Image source={images.newYork} className="w-full h-40 rounded-lg" />
 			<View className="flex flex-col mt-2">
 				<Text className="text-base font-rubik-bold text-black-300">
 					{item.name}
+					Cozy Studio Apartment
 				</Text>
 				<Text className="text-xs font-rubik text-black-100">
 					{item.address}
+					New York, USA
 				</Text>
 				<View className="flex flex-row items-center justify-between mt-2">
 					<Text className="text-base font-rubik-bold text-primary-300">
 						${item.price}
+						80,000
 					</Text>
 					<Image
 						source={icons.heart}
