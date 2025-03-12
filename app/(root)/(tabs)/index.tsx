@@ -7,6 +7,7 @@ import { Link } from "expo-router";
 import {
 	Image,
 	SafeAreaView,
+	ScrollView,
 	Text,
 	TouchableOpacity,
 	View,
@@ -15,6 +16,10 @@ import {
 export default function Index() {
 	return (
 		<SafeAreaView className="bg-white h-full">
+			<ScrollView
+			showsVerticalScrollIndicator={false}
+			contentContainerClassName="pb-32" 
+			>
 			<View className="px-5">
 				<View className="flex flex-row items-center justify-between mt-5">
 					<View className="flex flex-row items-center">
@@ -99,6 +104,7 @@ export default function Index() {
 					/>
 				</View>
 			</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 }
