@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { Text, ScrollView, TouchableOpacity } from "react-native";
-
 import { categories } from "@/constants/data";
 
 const Filters = () => {
@@ -20,7 +19,7 @@ const Filters = () => {
 		setSelectedCategory(category);
 		router.setParams({ filter: category });
 	};
-
+	
 	return (
 		<ScrollView
 			horizontal
