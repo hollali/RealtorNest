@@ -39,14 +39,12 @@ const SettingsItem = ({
 				{title}
 			</Text>
 		</View>
-
 		{showArrow && <Image source={icons.rightArrow} className="size-5" />}
 	</TouchableOpacity>
 );
 
 const Profile = () => {
 	const { user, refetch } = useGlobalContext();
-
 	const handleLogout = async () => {
 		const result = await logout();
 		if (result) {
@@ -56,7 +54,6 @@ const Profile = () => {
 			Alert.alert("Error", "Failed to logout");
 		}
 	};
-
 	return (
 		<SafeAreaView className="h-full bg-white">
 			<ScrollView
