@@ -35,7 +35,6 @@ export default function Index() {
 				numColumns={2}
 				contentContainerClassName="pb-32"
 				columnWrapperClassName="flex gap-5 px-5"
-				showsVerticalScrollIndicator={false}
 				ListHeaderComponent={
 					<View className="px-5">
 				<View className="flex flex-row items-center justify-between mt-5">
