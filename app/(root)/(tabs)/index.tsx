@@ -5,6 +5,7 @@ import icons from "@/constants/icons";
 import images from "@/constants/images";
 import { Link } from "expo-router";
 import {
+	FlatList,
 	Image,
 	SafeAreaView,
 	ScrollView,
@@ -16,11 +17,27 @@ import {
 export default function Index() {
 	return (
 		<SafeAreaView className="bg-white h-full">
-			<ScrollView
-			showsVerticalScrollIndicator={false}
-			contentContainerClassName="pb-32" 
-			>
-			<View className="px-5">
+			<FlatList 
+				data={[1,2]} 
+				renderItem={({item}) => (
+					<Card
+						item={{
+							$id: item.toString(),
+							$collectionId: "",
+							$databaseId: "",
+							$createdAt: "",
+							$updatedAt: "",
+							$permissions: [],
+						}}
+					/>
+				)}
+				keyExtractor={(item) => item.toString()}
+				numColumns={2}
+				contentContainerClassName="pb-32"
+				columnWrapperClassName="flex gap-5 px-5"
+				showsVerticalScrollIndicator={false}
+				ListHeaderComponent={
+					<View className="px-5">
 				<View className="flex flex-row items-center justify-between mt-5">
 					<View className="flex flex-row items-center">
 						<Image source={images.avatar} className="size-12 rounded-full" />
@@ -104,7 +121,9 @@ export default function Index() {
 					/>
 				</View>
 			</View>
-			</ScrollView>
+				}
+			/>
+			
 		</SafeAreaView>
 	);
 }
