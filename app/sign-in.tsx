@@ -15,7 +15,7 @@ const SignIn = () => {
 		if (result) {
 			refetch({});
 		} else {
-			Alert.alert('failed to login');
+			Alert.alert('Failed to login into Account');
 		}
 	};
 	return (
