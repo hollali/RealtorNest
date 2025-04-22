@@ -30,7 +30,7 @@ const Search = () => {
 					onChangeText={handleSearch}
 					placeholder="Search for anything"
 					placeholderTextColor="#A0A0A0"
-					className="text-sm font-rubik text-black-300 ml-2 flex-1"
+					className="text-sm font-rubik text-black-300 ml-2 flex-1 border-r-4"
 					accessibilityLabel="Search input"
 					accessible={true}
 				/>
