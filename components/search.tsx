@@ -11,8 +11,7 @@ const Search = () => {
 
 	const debouncedSearch = useDebouncedCallback((text: string) => {
 		router.setParams({ query: text });
-
-		// Optional: Navigate to a search page
+		//* Optional: Navigate to a search page
 		// router.push({ pathname: "/search", params: { query: text } });
 	}, 500);
 
