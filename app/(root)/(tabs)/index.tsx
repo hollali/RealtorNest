@@ -17,7 +17,11 @@ import {
 export default function Index() {
 	return (
 		<SafeAreaView className="bg-white h-full">
-			<View className="px-5">
+			<FlatList
+			data={[1,2,3,4]}
+			renderItem={({item}) => <Card />}
+			ListHeaderComponent={
+				<View className="px-5">
 				<View className="flex flex-row items-center justify-between mt-5">
 					<View className="flex flex-row items-center">
 						<Image source={images.avatar} className="size-12 rounded-full" />
@@ -42,9 +46,7 @@ export default function Index() {
 							</Text>
 						</TouchableOpacity>
 					</View>
-					<View className="flex flex-row gap-5 mt-5">
-						<FeaturedCard/>
-						<FeaturedCard />
+					<View className="flex flex-row gap-5 mt-5">						
 					</View>
 				</View>
 				<View className="flex flex-row items-center justify-between">
@@ -57,12 +59,11 @@ export default function Index() {
 							</Text>
 						</TouchableOpacity>
 					</View>
-					<Filters/>
-					<View className="flex flex-row gap-5 mt-5">
-						<Card />
-						<Card />
-					</View>
+					<Filters/>					
 			</View>
+			}
+			/>
+			
 		</SafeAreaView>
 	);
 }
