@@ -20,6 +20,11 @@ export default function Index() {
 			<FlatList
 			data={[1,2,3,4]}
 			renderItem={({item}) => <Card />}
+			keyExtractor={(item) => item.toString()}
+			numColumns={2}
+			contentContainerClassName="pb-32"
+			columnWrapperClassName="flex gap-5 px-5"
+			showsVerticalScrollIndicator={false}
 			ListHeaderComponent={
 				<View className="px-5">
 				<View className="flex flex-row items-center justify-between mt-5">
@@ -46,6 +51,15 @@ export default function Index() {
 							</Text>
 						</TouchableOpacity>
 					</View>
+					<FlatList 
+					data={[1,2,3]} 
+					renderItem={({item}) => <FeaturedCard/>}
+					keyExtractor={(item) => item.toString()}
+					horizontal
+					bounces={false}
+					contentContainerClassName="flex gap-5 mt-5"
+					showsHorizontalScrollIndicator={false}
+					/>
 					<View className="flex flex-row gap-5 mt-5">						
 					</View>
 				</View>
