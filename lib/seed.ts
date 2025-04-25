@@ -16,7 +16,7 @@ const COLLECTIONS = {
 
 const propertyTypes = [
 	"House",
-	"Townhomes",
+	"Townhouse",
 	"Condos",
 	"Duplexes",
 	"Studios",
