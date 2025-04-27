@@ -29,7 +29,6 @@ const facilities = [
 	"Laundry",
 	"Car Parking",
 	"Sports Center",
-	"Cutlery",
 	"Gym",
 	"Swimming pool",
 	"Wifi",

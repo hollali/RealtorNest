@@ -21,7 +21,7 @@ export default function Index() {
 	const {user} = useGlobalContext();
 	return (
 		<SafeAreaView className="bg-white h-full">
-			<Button title="seed" onPress={seed}/>
+			<Button title="Seed" onPress={seed}/>
 			<FlatList
 			data={[1,2,3,4,5,6]}
 			renderItem={({item}) => <Card />}
@@ -57,7 +57,7 @@ export default function Index() {
 						</TouchableOpacity>
 					</View>
 					<FlatList 
-					data={[1,2,3,4,5]} 
+					data={[7,8,9,10,11]} 
 					renderItem={({item}) => <FeaturedCard/>}
 					keyExtractor={(item) => item.toString()}
 					horizontal
