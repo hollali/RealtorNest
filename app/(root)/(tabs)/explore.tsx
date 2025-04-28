@@ -4,7 +4,7 @@ import React from "react";
 const Explore = () => {
 	return (
 		<SafeAreaView>
-			<Text>explore</Text>
+			<Text className="text-center">explore</Text>
 		</SafeAreaView>
 	);
 };
