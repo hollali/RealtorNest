@@ -79,7 +79,7 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/adrianhajdin/react_native-restate.git
+git clone https://github.com/hollali/realtor.git
 cd react_native-restate
 ```
 
@@ -197,7 +197,7 @@ const COLLECTIONS = {
 
 const propertyTypes = [
   "House",
-  "Townhomes",
+  "Townhouse",
   "Condos",
   "Duplexes",
   "Studios",
