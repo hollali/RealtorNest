@@ -79,8 +79,8 @@ Make sure you have the following installed on your machine:
 **Cloning the Repository**
 
 ```bash
-git clone https://github.com/hollali/realtor.git
-cd react_native-restate
+git clone https://github.com/hollali/RealtorNest.git
+cd RealtorNest
 ```
 
 **Installation** 
