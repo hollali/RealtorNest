@@ -1,11 +1,6 @@
 import { ID } from "react-native-appwrite";
 import { databases, config } from "./appwrite";
-import {
-	agentImages,
-	galleryImages,
-	propertiesImages,
-	reviewImages,
-} from "./data";
+import { agentImages,galleryImages,propertiesImages,reviewImages,} from "./data";
 
 const COLLECTIONS = {
 	AGENT: config.agentsCollectionId,
