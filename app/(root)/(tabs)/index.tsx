@@ -6,16 +6,7 @@ import images from "@/constants/images";
 import { useGlobalContext } from "@/lib/global-provider";
 import seed from "@/lib/seed";
 import { Link } from "expo-router";
-import {
-	Button,
-	FlatList,
-	Image,
-	SafeAreaView,
-	ScrollView,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { Button,FlatList,Image,SafeAreaView,ScrollView,Text,TouchableOpacity,View,} from "react-native";
 
 export default function Index() {
 	const {user} = useGlobalContext();
