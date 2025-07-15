@@ -14,17 +14,8 @@ import { getLatestProperties, getProperties } from "@/lib/appwrite";
 const Home = () => {
 	const { user } = useGlobalContext();
 	const params = useLocalSearchParams<{ query?: string; filter?: string }>();
-	const { data: latestProperties, loading: latestPropertiesLoading } =
-		useAppwrite({
-			fn: getLatestProperties,
-		});
-
-	const {
-		data: properties,
-		refetch,
-		loading,
-	} = useAppwrite({
-		fn: getProperties,
+	const { data: latestProperties, loading: latestPropertiesLoading } = useAppwrite({fn: getLatestProperties,});
+    const { data: properties,refetch,loading, } = useAppwrite({ fn: getProperties,
 		params: {
 			filter: params.filter!,
 			query: params.query!,
@@ -32,7 +23,6 @@ const Home = () => {
 		},
 		skip: true,
 	});
-
 	useEffect(() => {
 		refetch({
 			filter: params.filter!,
