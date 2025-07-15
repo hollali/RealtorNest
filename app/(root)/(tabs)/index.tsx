@@ -1,11 +1,4 @@
-import {
-	ActivityIndicator,
-	FlatList,
-	Image,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { ActivityIndicator,FlatList,Image,Text,TouchableOpacity,View } from "react-native";
 import { useEffect,useMemo } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -86,7 +79,6 @@ const greeting = useMemo(() => {
 									source={{ uri: user?.avatar }}
 									className="size-12 rounded-full"
 								/>
-
 								<View className="flex flex-col items-start ml-2 justify-center">
 									<Text className="text-xs font-rubik text-black-100">
 										{greeting}
@@ -110,7 +102,6 @@ const greeting = useMemo(() => {
 									</Text>
 								</TouchableOpacity>
 							</View>
-
 							{latestPropertiesLoading ? (
 								<ActivityIndicator size="large" className="text-primary-300" />
 							) : !latestProperties || latestProperties.length === 0 ? (
