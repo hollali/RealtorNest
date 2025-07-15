@@ -107,7 +107,7 @@ const Property = () => {
 							<Image source={icons.area} className="size-4" />
 						</View>
 						<Text className="text-black-300 text-sm font-rubik-medium ml-2">
-							{property?.area}
+							{property?.area} sqft
 						</Text>
 					</View>
 

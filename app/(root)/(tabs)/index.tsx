@@ -6,7 +6,7 @@ import {
 	TouchableOpacity,
 	View,
 } from "react-native";
-import { useEffect } from "react";
+import { useEffect,useMemo } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -55,6 +55,15 @@ const Home = () => {
 
 	const handleCardPress = (id: string) => router.push(`/properties/${id}`);
 
+
+const greeting = useMemo(() => {
+	const hour = new Date().getHours();
+	if (hour < 12) return "Good Morning";
+	if (hour < 17) return "Good Afternoon";
+	if (hour < 20) return "Good Evening";
+	return "Good Night";
+}, []);
+
 	return (
 		<SafeAreaView className="h-full bg-white">
 			<FlatList
@@ -85,7 +94,7 @@ const Home = () => {
 
 								<View className="flex flex-col items-start ml-2 justify-center">
 									<Text className="text-xs font-rubik text-black-100">
-										Good Morning
+										{greeting}
 									</Text>
 									<Text className="text-base font-rubik-medium text-black-300">
 										{user?.name}
