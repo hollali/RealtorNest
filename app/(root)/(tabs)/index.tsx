@@ -1,5 +1,12 @@
-import { ActivityIndicator,FlatList,Image,Text,TouchableOpacity,View } from "react-native";
-import { useEffect,useMemo } from "react";
+import {
+	ActivityIndicator,
+	FlatList,
+	Image,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
+import { useEffect, useMemo } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import { SafeAreaView } from "react-native-safe-area-context";
 import icons from "@/constants/icons";
@@ -14,8 +21,14 @@ import { getLatestProperties, getProperties } from "@/lib/appwrite";
 const Home = () => {
 	const { user } = useGlobalContext();
 	const params = useLocalSearchParams<{ query?: string; filter?: string }>();
-	const { data: latestProperties, loading: latestPropertiesLoading } = useAppwrite({fn: getLatestProperties,});
-    const { data: properties,refetch,loading, } = useAppwrite({ fn: getProperties,
+	const { data: latestProperties, loading: latestPropertiesLoading } =
+		useAppwrite({ fn: getLatestProperties });
+	const {
+		data: properties,
+		refetch,
+		loading,
+	} = useAppwrite({
+		fn: getProperties,
 		params: {
 			filter: params.filter!,
 			query: params.query!,
@@ -32,13 +45,13 @@ const Home = () => {
 	}, [params.filter, params.query]);
 
 	const handleCardPress = (id: string) => router.push(`/properties/${id}`);
-const greeting = useMemo(() => {
-	const hour = new Date().getHours();
-	if (hour < 12) return "Good Morning";
-	if (hour < 17) return "Good Afternoon";
-	if (hour < 20) return "Good Evening";
-	return "Good Night";
-}, []);
+	const greeting = useMemo(() => {
+		const hour = new Date().getHours();
+		if (hour < 12) return "Good Morning";
+		if (hour < 17) return "Good Afternoon";
+		if (hour < 20) return "Good Evening";
+		return "Good Night";
+	}, []);
 
 	return (
 		<SafeAreaView className="h-full bg-white">
