@@ -1,4 +1,4 @@
-import { Avatars,Client,Account,Databases,OAuthProvider,Query,} from "react-native-appwrite";
+import { Avatars,Client,Account,Databases,OAuthProvider,Query } from "react-native-appwrite";
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
 
