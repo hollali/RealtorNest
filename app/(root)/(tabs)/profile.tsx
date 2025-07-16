@@ -1,13 +1,4 @@
-import {
-	Alert,
-	Image,
-	ImageSourcePropType,
-	SafeAreaView,
-	ScrollView,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { Alert,Image,ImageSourcePropType,SafeAreaView,ScrollView,Text,TouchableOpacity,View } from "react-native";
 import { logout } from "@/lib/appwrite";
 import { useGlobalContext } from "@/lib/global-provider";
 import icons from "@/constants/icons";
