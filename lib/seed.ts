@@ -1,4 +1,4 @@
-import { ID } from "react-native-appwrite";
+import { ID, Query } from "react-native-appwrite";
 import { databases, config } from "./appwrite";
 import { agentImages,galleryImages,propertiesImages,reviewImages,} from "./data";
 
@@ -7,6 +7,7 @@ const COLLECTIONS = {
 	REVIEWS: config.reviewsCollectionId,
 	GALLERY: config.galleriesCollectionId,
 	PROPERTY: config.propertiesCollectionId,
+	BOOKING: config.bookingsCollectionId,
 };
 
 const propertyTypes = [
@@ -173,6 +174,36 @@ async function seed() {
 					gallery: assignedGalleries.map((gallery) => gallery.$id),
 				}
 			);
+
+			// Seed Bookings
+const bookings = [];
+for (let i = 0; i < 10; i++) {
+	const randomUserId = `user_${i + 1}`; // Replace with real or test user IDs if needed
+	const randomProperty =
+		propertiesImages[Math.floor(Math.random() * propertiesImages.length)];
+	const randomPropertyDoc = await databases.listDocuments(
+		config.databaseId!,
+		COLLECTIONS.PROPERTY!,
+		[Query.limit(1), Query.offset(Math.floor(Math.random() * 10))]
+	);
+	const property = randomPropertyDoc.documents[0];
+	if (!property) continue;
+
+	const booking = await databases.createDocument(
+		config.databaseId!,
+		COLLECTIONS.BOOKING!,
+		ID.unique(),
+		{
+			userId: randomUserId,
+			propertyId: property.$id,
+			price: property.price,
+			date: new Date(Date.now() - Math.random() * 1e10).toISOString(), // Random past date
+		}
+	);
+	bookings.push(booking);
+}
+console.log(`Seeded ${bookings.length} bookings.`);
+
 
 			console.log(`Seeded property: ${property.name}`);
 		}

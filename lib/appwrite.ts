@@ -1,4 +1,4 @@
-import { Avatars,Client,Account,Databases,OAuthProvider,Query } from "react-native-appwrite";
+import { Avatars,Client,Account,Databases,OAuthProvider,Query,} from "react-native-appwrite";
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
 
@@ -12,6 +12,7 @@ export const config = {
 	reviewsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_REVIEWS_COLLECTION_ID,
 	agentsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_AGENTS_COLLECTION_ID,
 	propertiesCollectionId:process.env.EXPO_PUBLIC_APPWRITE_PROPERTIES_COLLECTION_ID,
+	bookingsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_BOOKINGS_COLLECTION_ID,
 };
 
 export const client = new Client();
@@ -19,7 +20,7 @@ export const client = new Client();
 client
 	.setEndpoint(config.endpoint!)
 	.setProject(config.projectId!)
-	.setPlatform(config.platform!);
+	.setPlatform(config.platform!)
 
 export const avatar = new Avatars(client);
 export const account = new Account(client);
@@ -144,5 +145,19 @@ export async function getPropertyById({ id }: { id: string }) {
 	} catch (error) {
 		console.error(error);
 		return null;
+	}
+}
+
+export async function getBookingsForUser(userId: string) {
+	try {
+		const result = await databases.listDocuments(
+			config.databaseId!,
+			config.bookingsCollectionId!,
+			[Query.equal("userId", userId), Query.orderDesc("$createdAt")]
+		);
+		return result.documents;
+	} catch (error) {
+		console.error("Error fetching user bookings:", error);
+		return [];
 	}
 }
