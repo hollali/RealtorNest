@@ -1,12 +1,4 @@
-import {
-	ActivityIndicator,
-	FlatList,
-	Image,
-	SafeAreaView,
-	Text,
-	TouchableOpacity,
-	View,
-} from "react-native";
+import { ActivityIndicator,FlatList,Image,SafeAreaView,Text,TouchableOpacity,View } from "react-native";
 import { useEffect } from "react";
 import { router, useLocalSearchParams } from "expo-router";
 import icons from "@/constants/icons";
