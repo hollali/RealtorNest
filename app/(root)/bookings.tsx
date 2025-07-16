@@ -1,8 +1,16 @@
-import { View, Text, ScrollView, Image, TouchableOpacity } from "react-native";
+import {
+	View,
+	Text,
+	ScrollView,
+	Image,
+	TouchableOpacity,
+	SafeAreaView,
+} from "react-native";
 import { useGlobalContext } from "@/lib/global-provider";
 import { useEffect, useState } from "react";
 import { getBookingsForUser, getPropertyById } from "@/lib/appwrite";
 import { router } from "expo-router";
+import icons from "@/constants/icons";
 
 export default function BookingsScreen() {
 	const { user } = useGlobalContext();
@@ -41,32 +49,53 @@ export default function BookingsScreen() {
 		}
 	};
 
-	if (loading) return <Text className="p-5 text-lg">Loading bookings...</Text>;
-	if (!bookings.length)
-		return <Text className="p-5 text-lg">No bookings yet.</Text>;
-
 	return (
-		<ScrollView className="p-5 bg-white">
-			{bookings.map((booking, index) => (
+		<SafeAreaView className="flex-1 bg-white">
+			<ScrollView className="p-5 bg-white">
+				{/* Back Button */}
 				<TouchableOpacity
-					key={index}
-					onPress={() => handlePropertyPress(booking.property?.$id)}
-					className="mb-4 bg-primary-100 p-4 rounded-xl">
-					<Image
-						source={{ uri: booking.property?.image }}
-						className="h-40 w-full rounded-xl mb-3"
-					/>
-					<Text className="text-xl font-rubik-bold">
-						{booking.property?.name}
-					</Text>
-					<Text className="text-black-200 font-rubik mt-1">
-						Booked for ${booking.price}
-					</Text>
-					<Text className="text-black-300 text-xs">
-						{new Date(booking.date).toLocaleDateString()}
+					onPress={() => router.back()}
+					className="mb-5 flex-row items-center">
+					<Image source={icons.backArrow} className="w-5 h-5 mr-2" />
+					<Text className="text-black-300 font-rubik-medium text-base">
+						Back
 					</Text>
 				</TouchableOpacity>
-			))}
-		</ScrollView>
+
+				{/* Loading */}
+				{loading && (
+					<Text className="text-lg font-rubik p-3">Loading bookings...</Text>
+				)}
+
+				{/* No Bookings */}
+				{!loading && bookings.length === 0 && (
+					<Text className="text-lg font-rubik p-3">No bookings yet.</Text>
+				)}
+
+				{/* Bookings List */}
+				{!loading &&
+					bookings.length > 0 &&
+					bookings.map((booking, index) => (
+						<TouchableOpacity
+							key={index}
+							onPress={() => handlePropertyPress(booking.property?.$id)}
+							className="mb-4 bg-primary-100 p-4 rounded-xl">
+							<Image
+								source={{ uri: booking.property?.image }}
+								className="h-40 w-full rounded-xl mb-3"
+							/>
+							<Text className="text-xl font-rubik-bold">
+								{booking.property?.name}
+							</Text>
+							<Text className="text-black-200 font-rubik mt-1">
+								Booked for ${booking.price}
+							</Text>
+							<Text className="text-black-300 text-xs">
+								{new Date(booking.date).toLocaleDateString()}
+							</Text>
+						</TouchableOpacity>
+					))}
+			</ScrollView>
+		</SafeAreaView>
 	);
 }
