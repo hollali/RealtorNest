@@ -54,12 +54,9 @@ export default function BookingsScreen() {
 			<ScrollView className="p-5 bg-white">
 				{/* Back Button */}
 				<TouchableOpacity
-					onPress={() => router.back()}
-					className="mb-5 flex-row items-center">
+					onPress={() => router.push("/(root)/(tabs)/profile")}
+					className="flex flex-row bg-primary-200 rounded-full size-11 items-center justify-center">
 					<Image source={icons.backArrow} className="w-5 h-5 mr-2" />
-					<Text className="text-black-300 font-rubik-medium text-base">
-						Back
-					</Text>
 				</TouchableOpacity>
 
 				{/* Loading */}
