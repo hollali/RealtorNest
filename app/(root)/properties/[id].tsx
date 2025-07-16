@@ -1,13 +1,4 @@
-import {
-	FlatList,
-	Image,
-	ScrollView,
-	Text,
-	TouchableOpacity,
-	View,
-	Dimensions,
-	Platform,
-} from "react-native";
+import { FlatList,Image,ScrollView,Text,TouchableOpacity,View,Dimensions,Platform} from "react-native";
 import { router, useLocalSearchParams } from "expo-router";
 import icons from "@/constants/icons";
 import images from "@/constants/images";
