@@ -161,3 +161,32 @@ export async function getBookingsForUser(userId: string) {
 		return [];
 	}
 }
+
+export async function createBooking({
+	userId,
+	propertyId,
+	price,
+}: {
+	userId: string;
+	propertyId: string;
+	price: number;
+}) {
+	try {
+		const result = await databases.createDocument(
+			config.databaseId!,
+			config.bookingsCollectionId!,
+			"unique()", // Appwrite will auto-generate a unique ID
+			{
+				userId,
+				propertyId,
+				price,
+				date: new Date().toISOString(), // optional field for tracking
+			}
+		);
+		return result;
+	} catch (error) {
+		console.error("Error creating booking:", error);
+		throw error;
+	}
+}
+
