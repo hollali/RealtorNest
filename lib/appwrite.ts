@@ -1,6 +1,7 @@
 import { Avatars,Client,Account,Databases,OAuthProvider,Query,} from "react-native-appwrite";
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
+import { Storage } from "react-native-appwrite";
 
 export const config = {
 	platform: "com.hollali.realtornest",
@@ -13,6 +14,8 @@ export const config = {
 	agentsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_AGENTS_COLLECTION_ID,
 	propertiesCollectionId:process.env.EXPO_PUBLIC_APPWRITE_PROPERTIES_COLLECTION_ID,
 	bookingsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_BOOKINGS_COLLECTION_ID,
+	storageBucketId: process.env.EXPO_PUBLIC_APPWRITE_STORAGE_BUCKET_ID,
+	userProfilesCollectionId: process.env.EXPO_PUBLIC_APPWRITE_USER_PROFILES_COLLECTION_ID,
 };
 
 export const client = new Client();
@@ -25,6 +28,7 @@ client
 export const avatar = new Avatars(client);
 export const account = new Account(client);
 export const databases = new Databases(client);
+export const storage = new Storage(client);
 
 export async function login() {
 	try {
@@ -195,3 +199,25 @@ export async function createBooking({
 	}
 }
 
+/*export async function uploadProfileImage(uri: string, userId: string) {
+	try {
+		const file = {
+			uri,
+			name: `${userId}-avatar.jpg`,
+			type: "image/jpeg",
+		};
+
+		const uploadedFile = await storage.createFile(
+			config.storageBucketId!,
+			"user-" + userId,
+			file
+		);
+
+		const imageUrl = storage.getFilePreview(config.storageBucketId!, uploadedFile.$id).href;
+
+		return imageUrl;
+	} catch (error) {
+		console.error("Failed to upload profile image:", error);
+		return null;
+	}
+}*/

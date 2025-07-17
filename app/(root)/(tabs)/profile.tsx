@@ -85,7 +85,6 @@ const Profile = () => {
 						<Text className="text-2xl font-rubik-bold mt-2">{user?.name}</Text>
 					</View>
 				</View>
-
 				<View className="flex flex-col mt-10">
 					<SettingsItem
 						icon={icons.calendar}
