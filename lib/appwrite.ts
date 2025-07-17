@@ -66,19 +66,24 @@ export async function logout() {
 
 export async function getCurrentUser() {
 	try {
-		const response = await account.get();
-		if (response.$id) {
+		const response = await account.get(); // Throws if guest
+		if (response?.$id) {
 			const useAvatar = avatar.getInitials(response.name);
 			return {
 				...response,
 				avatar: useAvatar.toString(),
 			};
 		}
-	} catch (error) {
-		console.error(error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.warn("User not authenticated:", error.message);
+		} else {
+			console.warn("Unknown error occurred", error);
+		}
 		return null;
 	}
 }
+
 
 export async function getLatestProperties() {
 	try {
