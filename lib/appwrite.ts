@@ -238,3 +238,12 @@ export async function uploadProfileImage(uri: string, userId: string) {
 		return null;
 	}
 }
+
+export async function updateUserProfile(userId: string, data: { avatar?: string }) {
+	return await databases.updateDocument(
+		config.databaseId!,
+		config.userProfilesCollectionId!,
+		userId,
+		data
+	);
+}
