@@ -2,6 +2,7 @@ import { Avatars,Client,Account,Databases,OAuthProvider,Query,} from "react-nati
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
 import { Storage } from "react-native-appwrite";
+import * as FileSystem from "expo-file-system";
 
 export const config = {
 	platform: "com.hollali.realtornest",
@@ -199,12 +200,19 @@ export async function createBooking({
 	}
 }
 
-/*export async function uploadProfileImage(uri: string, userId: string) {
+export async function uploadProfileImage(uri: string, userId: string) {
 	try {
+		// Get file info including size
+		const fileInfo = await FileSystem.getInfoAsync(uri);
+		if (!fileInfo.exists || !fileInfo.size) {
+			throw new Error("File does not exist or size is unknown");
+		}
+
 		const file = {
 			uri,
 			name: `${userId}-avatar.jpg`,
 			type: "image/jpeg",
+			size: fileInfo.size,
 		};
 
 		const uploadedFile = await storage.createFile(
@@ -220,4 +228,4 @@ export async function createBooking({
 		console.error("Failed to upload profile image:", error);
 		return null;
 	}
-}*/
+}
