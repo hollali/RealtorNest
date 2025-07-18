@@ -4,8 +4,6 @@ import { useGlobalContext } from "@/lib/global-provider";
 import icons from "@/constants/icons";
 import { settings } from "@/constants/data";
 import { router } from "expo-router";
-import * as ImagePicker from "expo-image-picker";
-import { uploadProfileImage, updateUserProfile } from "@/lib/appwrite";
 
 interface SettingsItemProp {
 	icon: ImageSourcePropType;

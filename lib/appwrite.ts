@@ -2,7 +2,6 @@ import { Avatars,Client,Account,Databases,OAuthProvider,Query,} from "react-nati
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
 import { Storage } from "react-native-appwrite";
-import * as FileSystem from "expo-file-system";
 
 export const config = {
 	platform: "com.hollali.realtornest",
@@ -68,35 +67,26 @@ export async function logout() {
 		return false;
 	}
 }
+
 export async function getCurrentUser() {
 	try {
-		const response = await account.get();
-		if (!response?.$id) return null;
-
-		let avatarUrl = "";
-
-		try {
-			const profile = await databases.getDocument(
-				config.databaseId!,
-				config.userProfilesCollectionId!,
-				response.$id
-			);
-			avatarUrl = profile?.avatar ?? avatar.getInitials(response.name).toString();
-		} catch (e) {
-			console.warn("No profile document found for user. Using initials.");
-			avatarUrl = avatar.getInitials(response.name).toString();
+		const response = await account.get(); // Throws if guest
+		if (response?.$id) {
+			const useAvatar = avatar.getInitials(response.name);
+			return {
+				...response,
+				avatar: useAvatar.toString(),
+			};
 		}
-
-		return {
-			...response,
-			avatar: avatarUrl,
-		};
-	} catch (error) {
-		console.warn("User not authenticated:", error);
+	} catch (error: unknown) {
+		if (error instanceof Error) {
+			console.warn("User not authenticated:", error.message);
+		} else {
+			console.warn("Unknown error occurred", error);
+		}
 		return null;
 	}
 }
-
 
 
 export async function getLatestProperties() {
@@ -209,19 +199,12 @@ export async function createBooking({
 	}
 }
 
-export async function uploadProfileImage(uri: string, userId: string) {
+/*export async function uploadProfileImage(uri: string, userId: string) {
 	try {
-		// Get file info including size
-		const fileInfo = await FileSystem.getInfoAsync(uri);
-		if (!fileInfo.exists || !fileInfo.size) {
-			throw new Error("File does not exist or size is unknown");
-		}
-
 		const file = {
 			uri,
 			name: `${userId}-avatar.jpg`,
 			type: "image/jpeg",
-			size: fileInfo.size,
 		};
 
 		const uploadedFile = await storage.createFile(
@@ -237,13 +220,4 @@ export async function uploadProfileImage(uri: string, userId: string) {
 		console.error("Failed to upload profile image:", error);
 		return null;
 	}
-}
-
-export async function updateUserProfile(userId: string, data: { avatar?: string }) {
-	return await databases.updateDocument(
-		config.databaseId!,
-		config.userProfilesCollectionId!,
-		userId,
-		data
-	);
-}
+}*/
