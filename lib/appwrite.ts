@@ -68,26 +68,35 @@ export async function logout() {
 		return false;
 	}
 }
-
 export async function getCurrentUser() {
 	try {
-		const response = await account.get(); // Throws if guest
-		if (response?.$id) {
-			const useAvatar = avatar.getInitials(response.name);
-			return {
-				...response,
-				avatar: useAvatar.toString(),
-			};
+		const response = await account.get();
+		if (!response?.$id) return null;
+
+		let avatarUrl = "";
+
+		try {
+			const profile = await databases.getDocument(
+				config.databaseId!,
+				config.userProfilesCollectionId!,
+				response.$id
+			);
+			avatarUrl = profile?.avatar ?? avatar.getInitials(response.name).toString();
+		} catch (e) {
+			console.warn("No profile document found for user. Using initials.");
+			avatarUrl = avatar.getInitials(response.name).toString();
 		}
-	} catch (error: unknown) {
-		if (error instanceof Error) {
-			console.warn("User not authenticated:", error.message);
-		} else {
-			console.warn("Unknown error occurred", error);
-		}
+
+		return {
+			...response,
+			avatar: avatarUrl,
+		};
+	} catch (error) {
+		console.warn("User not authenticated:", error);
 		return null;
 	}
 }
+
 
 
 export async function getLatestProperties() {
