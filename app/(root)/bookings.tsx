@@ -1,11 +1,4 @@
-import {
-	View,
-	Text,
-	ScrollView,
-	Image,
-	TouchableOpacity,
-	SafeAreaView,
-} from "react-native";
+import {View,Text,ScrollView,Image,TouchableOpacity,SafeAreaView,} from "react-native";
 import { useGlobalContext } from "@/lib/global-provider";
 import { useEffect, useState } from "react";
 import { getBookingsForUser, getPropertyById } from "@/lib/appwrite";
