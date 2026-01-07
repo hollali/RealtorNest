@@ -1,4 +1,4 @@
-import { Avatars,Client,Account,Databases,OAuthProvider,Query,} from "react-native-appwrite";
+import { Avatars, Client, Account, Databases, OAuthProvider, Query, } from "react-native-appwrite";
 import * as Linking from "expo-linking";
 import { openAuthSessionAsync } from "expo-web-browser";
 import { Storage } from "react-native-appwrite";
@@ -9,10 +9,10 @@ export const config = {
 	projectId: process.env.EXPO_PUBLIC_APPWRITE_PROJECT_ID,
 	iosProjectId: process.env.EXPO_PUBLIC_APPWRITE_IOS_PROJECT_ID,
 	databaseId: process.env.EXPO_PUBLIC_APPWRITE_DATABASE_ID,
-	galleriesCollectionId:process.env.EXPO_PUBLIC_APPWRITE_GALLERIES_COLLECTION_ID,
+	galleriesCollectionId: process.env.EXPO_PUBLIC_APPWRITE_GALLERIES_COLLECTION_ID,
 	reviewsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_REVIEWS_COLLECTION_ID,
 	agentsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_AGENTS_COLLECTION_ID,
-	propertiesCollectionId:process.env.EXPO_PUBLIC_APPWRITE_PROPERTIES_COLLECTION_ID,
+	propertiesCollectionId: process.env.EXPO_PUBLIC_APPWRITE_PROPERTIES_COLLECTION_ID,
 	bookingsCollectionId: process.env.EXPO_PUBLIC_APPWRITE_BOOKINGS_COLLECTION_ID,
 	storageBucketId: process.env.EXPO_PUBLIC_APPWRITE_STORAGE_BUCKET_ID,
 	userProfilesCollectionId: process.env.EXPO_PUBLIC_APPWRITE_USER_PROFILES_COLLECTION_ID,
