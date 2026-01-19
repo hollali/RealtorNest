@@ -10,6 +10,7 @@ export default function BookingsScreen() {
   const { user } = useGlobalContext();
   const [bookings, setBookings] = useState<any[]>([]);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchBookings = async () => {
@@ -19,15 +20,34 @@ export default function BookingsScreen() {
       }
 
       try {
+        setError(null);
         const data = await getBookingsForUser(user.$id);
-        const detailedBookings = await Promise.all(
+        const propertyResults = await Promise.allSettled(
           data.map(async (booking) => {
             const property = await getPropertyById({ id: booking.propertyId });
             return { ...booking, property };
           }),
         );
+
+        const detailedBookings = propertyResults
+          .map((result, index) => {
+            if (result.status === "fulfilled") {
+              return result.value;
+            } else {
+              console.error(
+                `Failed to fetch property for booking at index ${index}:`,
+                result.reason,
+              );
+              return { ...data[index], property: null };
+            }
+          })
+          .filter((booking) => booking.property !== null);
+
         setBookings(detailedBookings);
       } catch (error) {
+        const errorMessage =
+          error instanceof Error ? error.message : "Failed to fetch bookings";
+        setError(errorMessage);
         console.error("Error fetching bookings:", error);
       } finally {
         setLoading(false);
@@ -54,6 +74,13 @@ export default function BookingsScreen() {
           <Image source={icons.backArrow} className="w-5 h-5 mr-2" />
         </TouchableOpacity>
 
+        {/* Error State */}
+        {error && (
+          <Text className="text-lg font-rubik-bold text-red-500 p-3 bg-red-100 rounded-lg mb-3">
+            {error}
+          </Text>
+        )}
+
         {/* Loading */}
         {loading && (
           <Text className="text-lg font-rubik p-3">Loading bookings...</Text>
@@ -67,9 +94,9 @@ export default function BookingsScreen() {
         {/* Bookings List */}
         {!loading &&
           bookings.length > 0 &&
-          bookings.map((booking, index) => (
+          bookings.map((booking) => (
             <TouchableOpacity
-              key={index}
+              key={booking.$id || booking.id || `booking-${Date.now()}`}
               onPress={() => handlePropertyPress(booking.property?.$id)}
               className="mb-4 bg-primary-100 p-4 rounded-xl"
             >
