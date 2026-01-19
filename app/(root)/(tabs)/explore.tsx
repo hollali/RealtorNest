@@ -27,16 +27,16 @@ const Explore = () => {
   } = useAppwrite({
     fn: getProperties,
     params: {
-      filter: params.filter!,
-      query: params.query!,
+      filter: params.filter ?? "",
+      query: params.query ?? "",
     },
     skip: true,
   });
 
   useEffect(() => {
     refetch({
-      filter: params.filter!,
-      query: params.query!,
+      filter: params.filter ?? "",
+      query: params.query ?? "",
     });
   }, [params.filter, params.query]);
 
